@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bharatraj88/angular2-tooltip.git"
+    "url": "git+https://github.com/bharatraj88/ng2-tooltip.git"
   },
   "keywords": [
     "angular2",
@@ -18,7 +18,7 @@
   "author": "Bharat Raj <bharatraj.arutla@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bharatraj88/angular2-tooltip/issues"
+    "url": "https://github.com/bharatraj88/ng2-tooltip/issues"
   },
-  "homepage": "https://github.com/bharatraj88/angular2-tooltip#readme"
+  "homepage": "https://github.com/bharatraj88/ng2-tooltip#readme"
 }
