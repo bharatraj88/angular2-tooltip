@@ -9,7 +9,7 @@ import { Component, Input, DynamicComponentLoader, ElementRef, Renderer, Compone
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 @Component({
   template : ``,
-  selector: '[toolTip]',
+  selector: '[tooltip]',
   host: {
     '(mouseover)': 'displayTooltip($event.target)',
     '(mouseleave)' : 'hideToolTip()'
