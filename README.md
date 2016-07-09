@@ -49,10 +49,15 @@ To test or check the working of this component, clone from git repository.
 
 This will start webpack server in 3000 port. Navigate to http://localhost:3000/ to view and check the component.
 
+#Change Log
+
+Click [Here](https://github.com/bharatraj88/angular2-tooltip/blob/master/CHANGELOG.md) to view the change log of npm releases
+
 
 #Help Or Need any Enhancements?
 
 Submit a issue in [github](https://github.com/bharatraj88/angular2-tooltip/issues/new) with details of your problems. You can also use [Plunker](https://plnkr.co/). Donot forget to mention the **AngularJS2 version** which you are using.
+
 
 
 
