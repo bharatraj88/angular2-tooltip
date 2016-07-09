@@ -1,5 +1,8 @@
 import 'reflect-metadata';
 import 'rxjs';
 import 'zone.js/dist/zone';
-import 'angular2/core';
-import 'angular2/http';
+import '@angular/core';
+import '@angular/common';
+import '@angular/http';
+import '@angular/platform-browser';
+import '@angular/platform-browser-dynamic';

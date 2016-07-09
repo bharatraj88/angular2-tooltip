@@ -5,10 +5,11 @@ Class given in ngClass will be appended to the tooltip widget
             </span>
 **/
 
-import { Component,Directive, Input, DynamicComponentLoader, ElementRef, Renderer, ComponentRef } from 'angular2/core';
-import { DOM } from 'angular2/src/platform/dom/dom_adapter';
+import { Component,Directive, Input, DynamicComponentLoader, ElementRef, Renderer, ViewContainerRef,ComponentRef } from '@angular/core';
+import {BrowserDomAdapter} from '@angular/platform-browser/src/browser/browser_adapter';
 @Directive({
   selector: '[tooltip]',
+  providers : [BrowserDomAdapter],
   host: {
     '(mouseover)': 'displayTooltip($event)',
     '(mouseleave)' : 'hideToolTip()'
@@ -20,11 +21,12 @@ export class ToolTipComponent{
     @Input()
     private ngToolTipClass: string;
 
-    private contentCmpRef : ComponentRef;
+    private contentCmpRef : ComponentRef<ToolTipContent>;
 
     constructor(private _loader:DynamicComponentLoader,
-                private _elementRef:ElementRef,
-                private _renderer: Renderer) {
+                private _viewContainerRef:ViewContainerRef,
+                private _renderer: Renderer,
+              private _domAdapter : BrowserDomAdapter) {
     }
 
     displayTooltip(event:any){
@@ -32,24 +34,25 @@ export class ToolTipComponent{
       let self = this;
       let positionX = event.clientX;
       let positionY = event.clientY;
-      this._loader.loadNextToLocation(ToolTipContent,this._elementRef).then((compRef: ComponentRef) =>{
-          // Using DOM unit Custom Render service is implemented https://github.com/angular/angular/issues/2409
-          DOM.appendChild(DOM.query('body'), compRef.location.nativeElement);
-          self.contentCmpRef = compRef;
-          self.contentCmpRef.instance.content = self.content;
-          self.contentCmpRef.instance.targetClass = self.ngToolTipClass;
-          self.contentCmpRef.instance.top = positionY;
-          self.contentCmpRef.instance.left = positionX;
+      this._loader.loadNextToLocation(ToolTipContent,this._viewContainerRef).
+          then((compRef: ComponentRef<ToolTipContent>) =>{
+                self._domAdapter.appendChild(self._domAdapter.query('body'), compRef.location.nativeElement);
+                self.contentCmpRef = compRef;
+                self.contentCmpRef.instance.content = self.content;
+                self.contentCmpRef.instance.targetClass = self.ngToolTipClass;
+                self.contentCmpRef.instance.top = positionY;
+                self.contentCmpRef.instance.left = positionX;
       });
     }
 
     hideToolTip(){
-      this.contentCmpRef.dispose();
+      this.contentCmpRef.destroy();
     }
 }
 
 
 @Component({
+  selector : 'tooltip-content',
   template : `<div class="ng-tool-tip-content"
                     [ngClass]="targetClass"
                     [ngStyle]="{'top': top+'px', 'left': left+'px'}">
