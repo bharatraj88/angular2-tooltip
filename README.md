@@ -41,8 +41,8 @@ Class given in ngClass will be appended to the tooltip widget
 
 To test or check the working of this component, clone from git repository.
 
-> git clone https://github.com/bharatraj88/angular2-tooltip
-
+> git clone -b 1.1.0 --single-branch https://github.com/bharatraj88/angular2-tooltip
+ 
 > npm install
 
 > npm test
