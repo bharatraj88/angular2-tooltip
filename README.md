@@ -3,6 +3,7 @@ Customizable npm packaged Angular2 tooltip component
 
 #Requirements
 NodeJs
+
 Angular2 (beta versions)
 
 **Note**: *Current version of this component is not yet compatible with Angular2 rc Releases.*
@@ -38,7 +39,9 @@ Class given in ngClass will be appended to the tooltip widget
 To test or check the working of this component, clone from git repository.
 
 > git clone https://github.com/bharatraj88/angular2-tooltip
+
 > npm install
+
 > npm test
 
 This will start webpack server in 3000 port. Navigate to http://localhost:3000/ to view and check the component.
