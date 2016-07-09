@@ -10,6 +10,7 @@ Angular2 (beta versions)
 
 #Usage
 *Installing*:
+
 npm install angular2-tooltip --save
 
 *Using*:
@@ -29,9 +30,11 @@ Class given in ngClass will be appended to the tooltip widget
 #Options
 
  1. **content** (*mandatory*): string
+ 
 	 Any HTML content or text which needs to displayed as tootip
 
  2. **ngToolTipClass** (*optional*) : string
+ 
 	 Class for customizing the tool tip display. This class will be appended to the tooltip element on display.
 
 #Test Component
