@@ -5,13 +5,12 @@ Class given in ngClass will be appended to the tooltip widget
             </span>
 **/
 
-import { Component, Input, DynamicComponentLoader, ElementRef, Renderer, ComponentRef } from 'angular2/core';
+import { Component,Directive, Input, DynamicComponentLoader, ElementRef, Renderer, ComponentRef } from 'angular2/core';
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
-@Component({
-  template : ``,
+@Directive({
   selector: '[tooltip]',
   host: {
-    '(mouseover)': 'displayTooltip($event.target)',
+    '(mouseover)': 'displayTooltip($event)',
     '(mouseleave)' : 'hideToolTip()'
   }
 })
@@ -28,17 +27,19 @@ export class ToolTipComponent{
                 private _renderer: Renderer) {
     }
 
-    displayTooltip(target){
-      var self = this;
-      var boundingClientRect = target.getBoundingClientRect();
+    displayTooltip(event:any){
+      let target = event.target;
+      let self = this;
+      let positionX = event.clientX;
+      let positionY = event.clientY;
       this._loader.loadNextToLocation(ToolTipContent,this._elementRef).then((compRef: ComponentRef) =>{
           // Using DOM unit Custom Render service is implemented https://github.com/angular/angular/issues/2409
           DOM.appendChild(DOM.query('body'), compRef.location.nativeElement);
           self.contentCmpRef = compRef;
           self.contentCmpRef.instance.content = self.content;
           self.contentCmpRef.instance.targetClass = self.ngToolTipClass;
-          self.contentCmpRef.instance.top = boundingClientRect.bottom;
-          self.contentCmpRef.instance.left = boundingClientRect.left;
+          self.contentCmpRef.instance.top = positionY;
+          self.contentCmpRef.instance.left = positionX;
       });
     }
 
@@ -60,7 +61,6 @@ export class ToolTipComponent{
                 width: auto;
                 border: 1px solid #EEE;
                 background-color: #FFF;
-                padding: 1em;
                 position: absolute;
                 border-radius: 4px;
               }

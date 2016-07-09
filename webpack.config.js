@@ -12,7 +12,7 @@ module.exports = {
     filename: "./[name].bundle.js"
   },
   resolve: {
-    extensions: ['', '.ts', '.js','.html']
+    extensions: ['', '.ts', '.js','.html','.css']
   },
   devtool: 'source-map',
   module: {
