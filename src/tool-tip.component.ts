@@ -5,11 +5,11 @@ Class given in ngClass will be appended to the tooltip widget
             </span>
 **/
 
-import { Component,Directive, Input, DynamicComponentLoader, ElementRef, Renderer, ViewContainerRef,ComponentRef } from '@angular/core';
-import {BrowserDomAdapter} from '@angular/platform-browser/src/browser/browser_adapter';
+import { Component,Directive,Inject, ComponentFactoryResolver, Input, ElementRef, Renderer, ViewContainerRef,ComponentRef } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
+
 @Directive({
   selector: '[tooltip]',
-  providers : [BrowserDomAdapter],
   host: {
     '(mouseover)': 'displayTooltip($event)',
     '(mouseleave)' : 'hideToolTip()'
@@ -23,26 +23,21 @@ export class ToolTipComponent{
 
     private contentCmpRef : ComponentRef<ToolTipContent>;
 
-    constructor(private _loader:DynamicComponentLoader,
+    constructor(private _componentFactoryResolver:ComponentFactoryResolver,
                 private _viewContainerRef:ViewContainerRef,
                 private _renderer: Renderer,
-              private _domAdapter : BrowserDomAdapter) {
+                @Inject(DOCUMENT) private _document:any) {
     }
 
     displayTooltip(event:any){
-      let target = event.target;
       let self = this;
-      let positionX = event.clientX;
-      let positionY = event.clientY;
-      this._loader.loadNextToLocation(ToolTipContent,this._viewContainerRef).
-          then((compRef: ComponentRef<ToolTipContent>) =>{
-                self._domAdapter.appendChild(self._domAdapter.query('body'), compRef.location.nativeElement);
-                self.contentCmpRef = compRef;
-                self.contentCmpRef.instance.content = self.content;
-                self.contentCmpRef.instance.targetClass = self.ngToolTipClass;
-                self.contentCmpRef.instance.top = positionY;
-                self.contentCmpRef.instance.left = positionX;
-      });
+      let componentFactory = this._componentFactoryResolver.resolveComponentFactory(ToolTipContent);
+      self.contentCmpRef = this._viewContainerRef.createComponent(componentFactory);
+       self._document.querySelector('body').appendChild(self.contentCmpRef.location.nativeElement);
+       self.contentCmpRef.instance.content = self.content;
+          self.contentCmpRef.instance.targetClass = self.ngToolTipClass;
+          self.contentCmpRef.instance.mousePosition.top = event.clientY;
+          self.contentCmpRef.instance.mousePosition.left = event.clientX;
     }
 
     hideToolTip(){
@@ -52,10 +47,11 @@ export class ToolTipComponent{
 
 
 @Component({
-  selector : 'tooltip-content',
   template : `<div class="ng-tool-tip-content"
                     [ngClass]="targetClass"
-                    [ngStyle]="{'top': top+'px', 'left': left+'px'}">
+                    [innerHTML] = "content"
+                    [style.top.px]="top"
+                    [style.left.px]="left">
               </div>`,
   styles : [`
               .ng-tool-tip-content{
@@ -64,6 +60,7 @@ export class ToolTipComponent{
                 width: auto;
                 border: 1px solid #EEE;
                 background-color: #FFF;
+                padding: 1em;
                 position: absolute;
                 border-radius: 4px;
               }
@@ -74,10 +71,25 @@ export class ToolTipContent{
   constructor(private _elementRef:ElementRef){
 
   }
+
+  ngAfterContentChecked(){
+    this.top = this.mousePosition.top;
+    let toolTipWidth:number = this._elementRef.nativeElement.querySelector('div.ng-tool-tip-content').offsetWidth;
+    if(window.innerWidth < (toolTipWidth+this.mousePosition.left)){
+      this.left = this.mousePosition.left - toolTipWidth;
+    }
+    else{
+      this.left = this.mousePosition.left;
+    }
+  }
   private _content: string;
-  private _top: number;
-  private _left: number;
+  private top: number;
+  private left: number;
   private _targetClass : string;
+  public mousePosition : any = {
+    top : 0,
+    left : 0
+  };
 
   set targetClass(targetClass:string){
     this._targetClass = targetClass;
@@ -89,27 +101,10 @@ export class ToolTipContent{
 
   set content(content:string){
     this._content = content;
-    this._elementRef.nativeElement.querySelector('div.ng-tool-tip-content').innerHTML = content;
   }
 
   get content(){
     return this._content;
-  }
-
-  set top(top:number){
-    this._top = top;
-  }
-
-  get top(){
-    return this._top;
-  }
-
-  set left(left:number){
-    this._left = left;
-  }
-
-  get left(){
-    return this._left;
   }
 
 }

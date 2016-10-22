@@ -1,11 +1,11 @@
-import { Component,OnInit } from '@angular/core';
-import {ToolTipComponent} from '../tool-tip.component';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
 
 @Component({
     selector: 'test-app',
-    template: require('./test.component.html'),
-    directives : [ToolTipComponent]
+    template: require('./test.component.html')
 })
+
 export class TestComponent implements OnInit {
 
     ngOnInit(){
