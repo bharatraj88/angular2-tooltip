@@ -6,7 +6,6 @@ NodeJs
 
 Angular2 version 2.1.1
 
-**Note**: *Current version of this component is not yet compatible with Angular2 rc Releases.*
 
 #Usage
 *Installing*:
