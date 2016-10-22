@@ -1,17 +1,16 @@
 {
   "name": "angular2-tooltip",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Angular2 Tooltip component",
   "main": "index.js",
   "scripts": {
-    "postinstall" : "typings install",
+    "postinstall": "typings install",
     "pretest": "rm -rf dist ; webpack",
     "test": "webpack-dev-server"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
-   "@angular/common": "2.1.1",
+    "@angular/common": "2.1.1",
     "@angular/http": "2.1.1",
     "@angular/compiler": "2.1.1",
     "@angular/core": "2.1.1",
@@ -29,7 +28,7 @@
     "core-js": "2.4.1",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26",
-    "es6-shim" : "0.35.0",
+    "es6-shim": "0.35.0",
     "ts-loader": "0.8.2",
     "raw-loader": "0.5.1",
     "css-loader": "0.23.1",
@@ -37,7 +36,7 @@
     "typings": "0.7.12",
     "webpack": "1.13.0",
     "webpack-dev-server": "1.14.1",
-     "webpack-merge": "0.14.0",
+    "webpack-merge": "0.14.0",
     "html-webpack-plugin": "2.9.0",
     "extract-text-webpack-plugin": "1.0.1"
   },
