@@ -36,6 +36,25 @@ Class given in ngClass will be appended to the tooltip widget
  
 	 Class for customizing the tool tip display. This class will be appended to the tooltip element on display.
 
+
+#Events
+
+  1.  **beforeShow** : ToolTipComponent
+
+       This event is emitted just before the tooltip is displayed. Returns the instance of tooltip.
+
+  2.  **show** : ToolTipComponent
+
+       This event is emitted just after the tooltip is displayed. Returns the instance of tooltip.
+    
+  3.  **beforeHide** : ToolTipComponent
+
+       This event is emitted just before the tooltip is going to hide. Returns the instance of tooltip.
+
+  4.  **hide** : ToolTipComponent
+
+       This event is emitted just before the tooltip is hidden. Returns the instance of tooltip.
+
 #Test Component
 
 To test or check the working of this component, clone from git repository.

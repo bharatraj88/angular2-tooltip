@@ -1,11 +1,12 @@
+import { HoveredContent } from './content/content';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ToolTipComponent, ToolTipContent } from './tool-tip.component';
+import { ToolTipComponent } from './tooltip';
 
 @NgModule({
     imports: [BrowserModule],
-    declarations: [ToolTipComponent,ToolTipContent],
+    declarations: [ToolTipComponent,HoveredContent],
     exports: [ToolTipComponent],
-    entryComponents: [ToolTipContent]
+    entryComponents: [HoveredContent]
 })
 export class ToolTipModule { }
