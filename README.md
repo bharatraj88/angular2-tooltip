@@ -36,6 +36,17 @@ Class given in ngClass will be appended to the tooltip widget
  
 	 Class for customizing the tool tip display. This class will be appended to the tooltip element on display.
 
+ 3. **showOnClick** (*optional*) : boolean (default : false)
+      
+      Set this option to true if you want to show tooltip on click. Tooltip will be hidden on move leave.
+
+ 4. **autoShowHide** (*optional*) : boolean (default : true) 
+
+      Set this option to false if you want to manage tooltip show and hide by your self. You need to call
+      showTooltip() and hideTooltip() explicitly by passing required parameters
+      (Use this option with care, absolute position (x and y) has to calculated by yourself)
+
+
 
 #Events
 

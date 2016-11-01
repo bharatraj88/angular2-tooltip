@@ -34,5 +34,11 @@ export class HoveredContent implements AfterContentChecked{
     if(window.innerWidth < (toolTipWidth+this.options.x)){
       this.options.x = this.options.x - toolTipWidth;
     }
+    if(this.options.offset && this.options.offset.x){
+        this.options.x +=this.options.offset.x
+    }
+    if(this.options.offset && this.options.offset.y){
+        this.options.y +=this.options.offset.y
+    }
   }
 }

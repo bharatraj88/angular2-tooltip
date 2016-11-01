@@ -1,3 +1,4 @@
+import { ContentOptions,Offset } from './content/options.d';
 import { HoveredContent } from './content/content';
 import { Component,Directive,Inject, ComponentFactoryResolver, OnInit,
           AfterContentChecked,Input,Output, ElementRef, Renderer, 
@@ -7,7 +8,8 @@ import { DOCUMENT } from '@angular/platform-browser';
 @Directive({
   selector: '[tooltip]',
   host: {
-    '(mouseover)': 'showTooltip($event)',
+    '(mouseover)': 'onMouseHover($event)',
+    '(click)': 'onClick($event)',
     '(mouseleave)' : 'hideTooltip()'
   }
 })
@@ -18,6 +20,10 @@ export class ToolTipComponent{
     @Output() hide : EventEmitter<ToolTipComponent> = new EventEmitter<ToolTipComponent>();
     @Input()  public content: string;
     @Input()  public ngToolTipClass: string;
+    @Input() tooltipDisplayOffset : Offset;
+    /** set it to true, which will show tooltip on click */
+    @Input() showOnClick:boolean = false;
+    @Input() autoShowHide:boolean = true;
 
     private contentCmpRef : ComponentRef<HoveredContent>;
 
@@ -27,23 +33,43 @@ export class ToolTipComponent{
                 @Inject(DOCUMENT) private _document:any) {
     }
 
-    private showTooltip(event:any){
+    private onMouseHover(event:any){
+        if(!this.autoShowHide || this.showOnClick){
+          return;
+        }
+        this.buildTooltip(event);
+    }
+    private onClick(event:any){
+      if(!this.autoShowHide || !this.showOnClick){
+          return;
+        }
+        this.buildTooltip(event);
+    }
+
+    public showTooltip(options:ContentOptions){
       let componentFactory = this._componentFactoryResolver.resolveComponentFactory(HoveredContent);
       this.contentCmpRef = this._viewContainerRef.createComponent(componentFactory);
       this.beforeShow.emit(this);
       this._document.querySelector('body').appendChild(this.contentCmpRef.location.nativeElement);
-      this.contentCmpRef.instance.options = {
+      this.contentCmpRef.instance.options = options;
+      this.show.emit(this);
+    }
+    private buildTooltip(event:any){
+      let options:ContentOptions = {
         content : this.content,
         cls : this.ngToolTipClass,
         x : event.clientX,
-        y: event.clientY
+        y: event.clientY,
+        offset : this.tooltipDisplayOffset
       };
-      this.show.emit(this);
+      this.showTooltip(options);
     }
 
-    private hideTooltip(){
-      this.beforeHide.emit(this);
-      this.contentCmpRef.destroy();
-      this.hide.emit(this);
+    public hideTooltip(){
+      if(this.contentCmpRef){
+        this.beforeHide.emit(this);
+        this.contentCmpRef.destroy();
+        this.hide.emit(this);
+      }
     }
 }
