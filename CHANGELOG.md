@@ -12,3 +12,8 @@
 #2.1.0
 
  1. Added support for events
+
+#2.2.0
+
+ 1.[Feature Request]#3  Added support for user being able to choose to show or hide tooltip on click or on hover
+

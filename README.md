@@ -44,7 +44,7 @@ Class given in ngClass will be appended to the tooltip widget
 
       Set this option to false if you want to manage tooltip show and hide by your self. You need to call
       showTooltip() and hideTooltip() explicitly by passing required parameters
-      (Use this option with care, absolute position (x and y) has to calculated by yourself)
+      (Use this option with care, absolute position (x and y) has to calculated by yourselfssss)
 
 
 
