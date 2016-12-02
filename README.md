@@ -12,6 +12,21 @@ Angular2 version 2.1.1
 
 npm install angular2-tooltip --save
 
+*Adding to a Module*:
+```typescript
+import {NgModule} from "@angular/core";
+...
+import {TooltipModule} from 'ng2-tooltip'
+ 
+@NgModule({
+    imports: [
+        ...
+        TooltipModule
+    ],
+    ...
+})
+```
+
 *Using*:
 
 Place attribute **tooltip** on to any html element which you want to display a tool tip for. [Similar to attribute **disabled** on to input element for disabling it].
