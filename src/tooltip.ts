@@ -1,4 +1,4 @@
-import { ContentOptions,Offset } from './content/options.d';
+import { ContentOptions,Offset } from './content/options';
 import { HoveredContent } from './content/content';
 import { Component,Directive,Inject, ComponentFactoryResolver, OnInit,
           AfterContentChecked,Input,Output, ElementRef, Renderer, 

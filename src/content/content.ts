@@ -1,4 +1,4 @@
-import { ContentOptions } from './options.d';
+import { ContentOptions } from './options';
 
 import { Component,AfterContentChecked , ElementRef } from '@angular/core';
 @Component({
