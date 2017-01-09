@@ -4,7 +4,7 @@
   "description": "Angular2 Tooltip component",
   "main": "index.js",
   "scripts": {
-    "postinstall": "typings install",
+    "postinstall": "",
     "pretest": "rm -rf dist ; webpack",
     "test": "webpack-dev-server"
   },

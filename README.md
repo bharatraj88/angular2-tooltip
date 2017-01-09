@@ -89,6 +89,8 @@ To test or check the working of this component, clone from git repository.
  
 > npm install
 
+> typings install
+
 > npm test
 
 This will start webpack server in 3000 port. Navigate to http://localhost:3000/ to view and check the component.
