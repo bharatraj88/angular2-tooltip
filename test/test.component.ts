@@ -1,5 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'test-app',
@@ -11,3 +10,4 @@ export class TestComponent implements OnInit {
     ngOnInit(){
     }
 }
+
