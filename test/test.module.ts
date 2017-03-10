@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {TestComponent} from './test.component';
 import { BrowserModule }  from '@angular/platform-browser';
-import {ToolTipModule} from '../src/tool-tip.module';
+import {ToolTipModule} from '../../angular2-tooltip';
 
 @NgModule({
     imports: [
