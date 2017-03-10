@@ -4,7 +4,7 @@ Customizable npm packaged Angular2 tooltip component
 #Requirements
 NodeJs
 
-Angular2 version 2.1.1
+Angular2 version 2.4.3
 
 
 #Usage
