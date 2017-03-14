@@ -28,4 +28,6 @@
     > npm install 
     > typings install
     > npm test
-        
+
+#3.1.0        
+1. Included default styles
