@@ -7,10 +7,19 @@ import { Component,AfterContentChecked , ElementRef } from '@angular/core';
                     [ngClass]="options.cls"
                     [innerHTML] = "options.content"
                     [style.top.px]="options.y"
-                    [style.left.px]="options.x"
-                    style="z-index : 10;border: 1px solid #000;background-color: #FFF;position: absolute;">
+                    [style.left.px]="options.x">
               </div>
-              `
+              `,
+styles : [`
+        .ng-tool-tip-content{
+                z-index : 10;
+                padding: 2px;
+                border: 1px solid #DDD;
+                color: #333;
+                background-color: #FFF;
+                position: absolute;   
+            }
+          `]           
 })
 
 export class HoveredContent implements AfterContentChecked{
