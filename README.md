@@ -16,12 +16,12 @@ npm install angular2-tooltip --save
 ```typescript
 import {NgModule} from "@angular/core";
 ...
-import {TooltipModule} from 'angular2-tooltip'
+import {ToolTipModule} from 'angular2-tooltip'
  
 @NgModule({
     imports: [
         ...
-        TooltipModule
+        ToolTipModule
     ],
     ...
 })
